@@ -42,11 +42,13 @@
             this.ckbxDragabble = new System.Windows.Forms.CheckBox();
             this.btnRemoveMarker = new System.Windows.Forms.Button();
             this.btnRemoveAll = new System.Windows.Forms.Button();
+            this.btnRetrieveMarker = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnRetrieveMarker);
             this.panel1.Controls.Add(this.btnRemoveAll);
             this.panel1.Controls.Add(this.btnRemoveMarker);
             this.panel1.Controls.Add(this.ckbxDragabble);
@@ -186,6 +188,16 @@
             this.btnRemoveAll.UseVisualStyleBackColor = true;
             this.btnRemoveAll.Click += new System.EventHandler(this.btnRemoveAll_Click);
             // 
+            // btnRetrieveMarker
+            // 
+            this.btnRetrieveMarker.Location = new System.Drawing.Point(11, 48);
+            this.btnRetrieveMarker.Name = "btnRetrieveMarker";
+            this.btnRetrieveMarker.Size = new System.Drawing.Size(96, 23);
+            this.btnRetrieveMarker.TabIndex = 13;
+            this.btnRetrieveMarker.Text = "Retrieve Marker";
+            this.btnRetrieveMarker.UseVisualStyleBackColor = true;
+            this.btnRetrieveMarker.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -217,6 +229,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRemoveAll;
         private System.Windows.Forms.Button btnRemoveMarker;
+        private System.Windows.Forms.Button btnRetrieveMarker;
     }
 }
 

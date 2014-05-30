@@ -99,7 +99,42 @@ namespace Test
             callScopeFunction("removeAllMarkers", "");
         }
 
+        public object EvaluateScript(string script)
+        {
+            return webView.EvaluateScript(script);
+        }
+
+        private void doRetrieveMarker(string id)
+        {
+            callScopeFunction("retrieveMarker", String.Format("\"{0}\"", id));
+        }
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            edLatitude.Text = "";
+            edLongitude.Text = "";
+
+            doRetrieveMarker(edId.Text);
+
+            edLatitude.Text = getElementValue("edLatitude");
+
+            edLongitude.Text = getElementValue("edLongitude");
+            //doApply();
+        }
+
+
+
         #region DOM manipulation Functions 
+
+        private string getElementValue(string elementId) {
+            object retObj = new Object();
+
+            retObj = EvaluateScript(String.Format("document.getElementById(\"{0}\").value", elementId));
+
+            string retStr = (string)retObj;
+            return retStr;
+        }
 
         private void doAddUpdateMarker()
         {
@@ -168,6 +203,7 @@ namespace Test
         {
             webView.Reload();
         }
+
 
 
     }
