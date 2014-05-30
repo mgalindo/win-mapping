@@ -55,17 +55,75 @@ namespace Test
 
         private void button1_Click(object sender, EventArgs e)
         {
-            JsSetElemeValuetById("edID", "xxx");
-            JsclickElementById("btnApply");
+            setNewMarkerId(edId.Text);
+            setNewMarkerCoords(edLatitude.Text, edLongitude.Text);
+            setNewMarkerDraggable(ckbxDragabble.Checked);
 
-            JsSetElemeValuetById("edLatitude", "33.43017060777363"); //edLatitude.Text);
-            JsclickElementById("btnApply");
+            doAddUpdateMarker();
+        }
 
-            JsSetElemeValuetById("edLongitude", "-86.69652080535889"); //edLongitude.Text);
-            JsclickElementById("btnApply");
+        private void btnRemoveMarker_Click(object sender, EventArgs e)
+        {
+            doremoveMarker(edId.Text);
+        }
 
+        private void btnRemoveAll_Click(object sender, EventArgs e)
+        {
+            doremoveAllMarkers();
+        }
+
+
+
+        private void setNewMarkerId(string id)
+        {
+            callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
+        }
+
+        private void setNewMarkerCoords(string Latitude, string Longitude)
+        {
+            callScopeFunction("setNewMarkerCoords", String.Format("\"{0}\", \"{1}\"", Latitude, Longitude));
+        }
+
+        private void setNewMarkerDraggable(bool dragabble)
+        {
+            callScopeFunction("setNewMarkerDraggable", String.Format("{0}", dragabble.ToString().ToLower()));
+        }
+
+        private void doremoveMarker(string id)
+        {
+            callScopeFunction("removeMarker", String.Format("\"{0}\"", id));
+        }
+
+        private void doremoveAllMarkers()
+        {
+            callScopeFunction("removeAllMarkers", "");
+        }
+
+        #region DOM manipulation Functions 
+
+        private void doAddUpdateMarker()
+        {
             JsclickElementById("btnAddUpdateMarker");
         }
+
+
+        private void doApply()
+        {
+            JsclickElementById("btnApply");
+        }
+
+        private void doExecute()
+        {
+            JsclickElementById("btnEval");
+        }
+
+        private void callScopeFunction(string functionName, string parameters) 
+        {
+            JsSetElemeValuetById("edEval", String.Format("$scope.{0}({1})", functionName, parameters));
+            doApply();
+            doExecute();
+        }
+
 
         private void JsclickElementById(string elementID)
         {
@@ -88,14 +146,6 @@ namespace Test
         {
 
             webView.ExecuteScript(String.Format("document.getElementById('{0}').value='{1}'", elementID, elementValue));
-
-//            dynamic textboxes = (JSObject)webView.ExecuteJavascriptWithResult("document.getElementsByTagName('input')");
-//            int len = textboxes.length;
-//            for (int i = 0; i < len; i++)
-//            {
-//                textboxes[i].value = elementValue;
-//            }
-
         }
 
         private void btnClearMarkers_Click(object sender, EventArgs e)
@@ -107,6 +157,7 @@ namespace Test
         {
             JsclickElementById("btmRemoveAllMarkers");
         }
+        #endregion
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -117,6 +168,7 @@ namespace Test
         {
             webView.Reload();
         }
+
 
     }
 }
