@@ -21,6 +21,7 @@ namespace Test
         private void Form1_Load(object sender, EventArgs e)
         {
             webView = new WebView("http://mgevodev64-vm:5000", new BrowserSettings());
+            //webView = new WebView("http://cnn.com", new BrowserSettings());
             webView.PropertyChanged += new PropertyChangedEventHandler(webView_PropertyChanged);
             webView.Dock = DockStyle.Fill;
             this.Controls.Add(webView);
@@ -116,6 +117,8 @@ namespace Test
             edLongitude.Text = "";
 
             doRetrieveMarker(edId.Text);
+            //We need a small delay to let the DOM get the changes
+            System.Threading.Thread.Sleep(100);
 
             edLatitude.Text = getElementValue("edLatitude");
 
@@ -202,6 +205,29 @@ namespace Test
         private void button3_Click(object sender, EventArgs e)
         {
             webView.Reload();
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            setNewMarkerId("1");
+            setNewMarkerCoords("11", "12");
+            setNewMarkerDraggable(true);
+            doAddUpdateMarker();
+
+            setNewMarkerId("2");
+            setNewMarkerCoords("21", "22");
+            setNewMarkerDraggable(true);
+            doAddUpdateMarker();
+
+            setNewMarkerId("3");
+            setNewMarkerCoords("31", "32");
+            setNewMarkerDraggable(true);
+            doAddUpdateMarker();
+
+            edId.Text = "1";
+            edLatitude.Text = "";
+            edLongitude.Text = "";
+
         }
 
 
