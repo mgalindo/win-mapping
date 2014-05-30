@@ -20,7 +20,7 @@ namespace Test
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            webView = new WebView("http://mgevodev64-vm:5000", new BrowserSettings());
+            webView = new WebView("http://mgevodev64-vm:5000/embedded", new BrowserSettings());
             //webView = new WebView("http://cnn.com", new BrowserSettings());
             webView.PropertyChanged += new PropertyChangedEventHandler(webView_PropertyChanged);
             webView.Dock = DockStyle.Fill;
