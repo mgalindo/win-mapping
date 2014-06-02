@@ -227,9 +227,10 @@ namespace Test
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            doCreateMarker("1", "33.4054515", "-86.7634086", false, "BHM South Plant", "Plant");
-            doCreateMarker("2", "33.487593", "-86.825162", false, "Truck 145", "Truck");
-            doCreateMarker("3", "33.507831", "-86.8122149", false, "Regions Field", "Job Site");
+            //doCreateMarker("1", "33.4054515", "-86.7634086", false, "BHM South Plant", "Plant");
+            //doCreateMarker("2", "33.487593", "-86.825162", false, "Truck 145", "Truck");
+            //doCreateMarker("3", "33.507831", "-86.8122149", false, "Regions Field", "Job Site");
+            callScopeFunction("simulateMarkers", "");
         }
 
 
