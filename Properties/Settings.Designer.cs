@@ -22,5 +22,14 @@ namespace Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://mgevodev64-vm:5050/embedded")]
+        public string MapServer {
+            get {
+                return ((string)(this["MapServer"]));
+            }
+        }
     }
 }
