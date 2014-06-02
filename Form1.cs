@@ -56,9 +56,17 @@ namespace Test
 
         private void button1_Click(object sender, EventArgs e)
         {
-            setNewMarkerId(edId.Text);
-            setNewMarkerCoords(edLatitude.Text, edLongitude.Text);
-            setNewMarkerDraggable(ckbxDragabble.Checked);
+
+            doCreateMarker(edId.Text, edLatitude.Text, edLongitude.Text, ckbxDragabble.Checked, edDescription.Text, cbbxType.Text);
+        }
+
+        private void doCreateMarker(string id, string latitude, string longitude, bool dragabble, string description, string markerType)
+        {
+            setNewMarkerId(id);
+            setNewMarkerCoords(latitude, longitude);
+            setNewMarkerDraggable(dragabble);
+            setNewMarkerDescription(description);
+            setNewMarkerType(markerType);
 
             doAddUpdateMarker();
         }
@@ -88,6 +96,16 @@ namespace Test
         private void setNewMarkerDraggable(bool dragabble)
         {
             callScopeFunction("setNewMarkerDraggable", String.Format("{0}", dragabble.ToString().ToLower()));
+        }
+
+        private void setNewMarkerDescription(string description)
+        {
+            callScopeFunction("setNewMarkerDescription", String.Format("\"{0}\"", description));
+        }
+
+        private void setNewMarkerType(string markerType)
+        {
+            callScopeFunction("setNewMarkerType", String.Format("\"{0}\"", markerType));
         }
 
         private void doremoveMarker(string id)
@@ -209,25 +227,9 @@ namespace Test
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            setNewMarkerId("1");
-            setNewMarkerCoords("11", "12");
-            setNewMarkerDraggable(true);
-            doAddUpdateMarker();
-
-            setNewMarkerId("2");
-            setNewMarkerCoords("21", "22");
-            setNewMarkerDraggable(true);
-            doAddUpdateMarker();
-
-            setNewMarkerId("3");
-            setNewMarkerCoords("31", "32");
-            setNewMarkerDraggable(true);
-            doAddUpdateMarker();
-
-            edId.Text = "1";
-            edLatitude.Text = "";
-            edLongitude.Text = "";
-
+            doCreateMarker("1", "33.4054515", "-86.7634086", false, "BHM South Plant", "Plant");
+            doCreateMarker("2", "33.487593", "-86.825162", false, "Truck 145", "Truck");
+            doCreateMarker("3", "33.507831", "-86.8122149", false, "Regions Field", "Job Site");
         }
 
 

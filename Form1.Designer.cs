@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnRetrieveMarker = new System.Windows.Forms.Button();
             this.btnRemoveAll = new System.Windows.Forms.Button();
             this.btnRemoveMarker = new System.Windows.Forms.Button();
@@ -43,12 +44,17 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAddMarker = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.edDescription = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbbxType = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbbxType);
+            this.panel1.Controls.Add(this.edDescription);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.btnRetrieveMarker);
             this.panel1.Controls.Add(this.btnRemoveAll);
@@ -66,8 +72,18 @@
             this.panel1.Controls.Add(this.btnAddMarker);
             this.panel1.Location = new System.Drawing.Point(1, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 74);
+            this.panel1.Size = new System.Drawing.Size(1007, 74);
             this.panel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(163, 48);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Simulate Markers";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // btnRetrieveMarker
             // 
@@ -81,9 +97,9 @@
             // 
             // btnRemoveAll
             // 
-            this.btnRemoveAll.Location = new System.Drawing.Point(596, 21);
+            this.btnRemoveAll.Location = new System.Drawing.Point(772, 48);
             this.btnRemoveAll.Name = "btnRemoveAll";
-            this.btnRemoveAll.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveAll.Size = new System.Drawing.Size(94, 20);
             this.btnRemoveAll.TabIndex = 12;
             this.btnRemoveAll.Text = "Remove All";
             this.btnRemoveAll.UseVisualStyleBackColor = true;
@@ -91,9 +107,9 @@
             // 
             // btnRemoveMarker
             // 
-            this.btnRemoveMarker.Location = new System.Drawing.Point(496, 22);
+            this.btnRemoveMarker.Location = new System.Drawing.Point(772, 26);
             this.btnRemoveMarker.Name = "btnRemoveMarker";
-            this.btnRemoveMarker.Size = new System.Drawing.Size(94, 23);
+            this.btnRemoveMarker.Size = new System.Drawing.Size(94, 20);
             this.btnRemoveMarker.TabIndex = 11;
             this.btnRemoveMarker.Text = "Remove Marker";
             this.btnRemoveMarker.UseVisualStyleBackColor = true;
@@ -172,7 +188,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(739, 11);
+            this.button3.Location = new System.Drawing.Point(875, 11);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(115, 23);
             this.button3.TabIndex = 2;
@@ -182,7 +198,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(739, 40);
+            this.button2.Location = new System.Drawing.Point(875, 40);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(115, 23);
             this.button2.TabIndex = 1;
@@ -192,23 +208,43 @@
             // 
             // btnAddMarker
             // 
-            this.btnAddMarker.Location = new System.Drawing.Point(415, 21);
+            this.btnAddMarker.Location = new System.Drawing.Point(772, 3);
             this.btnAddMarker.Name = "btnAddMarker";
-            this.btnAddMarker.Size = new System.Drawing.Size(75, 23);
+            this.btnAddMarker.Size = new System.Drawing.Size(94, 20);
             this.btnAddMarker.TabIndex = 0;
             this.btnAddMarker.Text = "Add Marker";
             this.btnAddMarker.UseVisualStyleBackColor = true;
             this.btnAddMarker.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button1
+            // edDescription
             // 
-            this.button1.Location = new System.Drawing.Point(163, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            this.edDescription.Location = new System.Drawing.Point(408, 24);
+            this.edDescription.Name = "edDescription";
+            this.edDescription.Size = new System.Drawing.Size(192, 20);
+            this.edDescription.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(405, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Description";
+            // 
+            // cbbxType
+            // 
+            this.cbbxType.FormattingEnabled = true;
+            this.cbbxType.Items.AddRange(new object[] {
+            "Default",
+            "Truck",
+            "Plant",
+            "Job Site"});
+            this.cbbxType.Location = new System.Drawing.Point(606, 23);
+            this.cbbxType.Name = "cbbxType";
+            this.cbbxType.Size = new System.Drawing.Size(121, 21);
+            this.cbbxType.TabIndex = 17;
+            this.cbbxType.Text = "Default";
             // 
             // Form1
             // 
@@ -243,6 +279,9 @@
         private System.Windows.Forms.Button btnRemoveMarker;
         private System.Windows.Forms.Button btnRetrieveMarker;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox edDescription;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbbxType;
     }
 }
 
