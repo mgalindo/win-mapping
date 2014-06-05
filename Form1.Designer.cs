@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbbxType = new System.Windows.Forms.ComboBox();
+            this.edDescription = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnRetrieveMarker = new System.Windows.Forms.Button();
             this.btnRemoveAll = new System.Windows.Forms.Button();
@@ -44,14 +47,16 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAddMarker = new System.Windows.Forms.Button();
-            this.edDescription = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbbxType = new System.Windows.Forms.ComboBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbbxAddress = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.cbbxAddress);
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.cbbxType);
             this.panel1.Controls.Add(this.edDescription);
             this.panel1.Controls.Add(this.label5);
@@ -70,16 +75,47 @@
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.btnAddMarker);
-            this.panel1.Location = new System.Drawing.Point(1, 1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1007, 74);
+            this.panel1.Size = new System.Drawing.Size(1003, 74);
             this.panel1.TabIndex = 0;
+            // 
+            // cbbxType
+            // 
+            this.cbbxType.FormattingEnabled = true;
+            this.cbbxType.Items.AddRange(new object[] {
+            "Default",
+            "Truck",
+            "Plant",
+            "Job Site"});
+            this.cbbxType.Location = new System.Drawing.Point(606, 23);
+            this.cbbxType.Name = "cbbxType";
+            this.cbbxType.Size = new System.Drawing.Size(121, 21);
+            this.cbbxType.TabIndex = 17;
+            this.cbbxType.Text = "Default";
+            // 
+            // edDescription
+            // 
+            this.edDescription.Location = new System.Drawing.Point(408, 24);
+            this.edDescription.Name = "edDescription";
+            this.edDescription.Size = new System.Drawing.Size(192, 20);
+            this.edDescription.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(405, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Description";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(163, 48);
+            this.button1.Location = new System.Drawing.Point(703, 47);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(63, 23);
             this.button1.TabIndex = 14;
             this.button1.Text = "Simulate Markers";
             this.button1.UseVisualStyleBackColor = true;
@@ -87,7 +123,7 @@
             // 
             // btnRetrieveMarker
             // 
-            this.btnRetrieveMarker.Location = new System.Drawing.Point(11, 48);
+            this.btnRetrieveMarker.Location = new System.Drawing.Point(606, 47);
             this.btnRetrieveMarker.Name = "btnRetrieveMarker";
             this.btnRetrieveMarker.Size = new System.Drawing.Size(96, 23);
             this.btnRetrieveMarker.TabIndex = 13;
@@ -216,35 +252,39 @@
             this.btnAddMarker.UseVisualStyleBackColor = true;
             this.btnAddMarker.Click += new System.EventHandler(this.button1_Click);
             // 
-            // edDescription
+            // label6
             // 
-            this.edDescription.Location = new System.Drawing.Point(408, 24);
-            this.edDescription.Name = "edDescription";
-            this.edDescription.Size = new System.Drawing.Size(192, 20);
-            this.edDescription.TabIndex = 16;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(45, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Address";
             // 
-            // label5
+            // cbbxAddress
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(405, 8);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Description";
-            // 
-            // cbbxType
-            // 
-            this.cbbxType.FormattingEnabled = true;
-            this.cbbxType.Items.AddRange(new object[] {
-            "Default",
-            "Truck",
-            "Plant",
-            "Job Site"});
-            this.cbbxType.Location = new System.Drawing.Point(606, 23);
-            this.cbbxType.Name = "cbbxType";
-            this.cbbxType.Size = new System.Drawing.Size(121, 21);
-            this.cbbxType.TabIndex = 17;
-            this.cbbxType.Text = "Default";
+            this.cbbxAddress.FormattingEnabled = true;
+            this.cbbxAddress.Items.AddRange(new object[] {
+            "",
+            "HEADQUARTERS 1800 International Park Dr, Birmingham, AL 35244",
+            "COLUMBUS 5168 Blazer Parkway, Dublin, Ohio 43017-1339",
+            "JWS 10000 West 75th St., Suite 103,  Shawnee Mission, KS 66204-2241",
+            "INTERGRA 9014 Heritage Parkway,Suite 303,  Woodridge, IL 60517-4939",
+            "CE 18, rue des Cayennes, Z.A. des Boutries,  78704 Conflans Ste Honorine Cedex,  " +
+                "FRANCE",
+            "TMS Houtsingel 5,  2719 EA Zoetermeer, The Netherlands",
+            "KP Av. Constituição, 1273 CEP 15025 120,  São José do Rio Preto, São Paulo,  Braz" +
+                "il",
+            "UK Unit 2 Avon Valley Business Park,  Chapel Way, St Annes, Bristol, BS4 4EU,  UK" +
+                "",
+            "INDIA 614C Wing, BSEL Tech Park,  Plot no. 39/5 & 39/5A, Opp. Vashi Station,  Vas" +
+                "hi - Navi Mumbai – 400 705",
+            "COLOMBIA Cra 7 #73-55 Edificio Torre Ultrabursátiles,  Bogotá, Colombia",
+            "BadAddressCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"});
+            this.cbbxAddress.Location = new System.Drawing.Point(49, 49);
+            this.cbbxAddress.Name = "cbbxAddress";
+            this.cbbxAddress.Size = new System.Drawing.Size(551, 21);
+            this.cbbxAddress.TabIndex = 19;
             // 
             // Form1
             // 
@@ -282,6 +322,9 @@
         private System.Windows.Forms.TextBox edDescription;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbbxType;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.ComboBox cbbxAddress;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -59,16 +59,17 @@ namespace Test
         private void button1_Click(object sender, EventArgs e)
         {
 
-            doCreateMarker(edId.Text, edLatitude.Text, edLongitude.Text, ckbxDragabble.Checked, edDescription.Text, cbbxType.Text);
+            doCreateMarker(edId.Text, edLatitude.Text, edLongitude.Text, ckbxDragabble.Checked, edDescription.Text, cbbxType.Text, cbbxAddress.Text);
         }
 
-        private void doCreateMarker(string id, string latitude, string longitude, bool dragabble, string description, string markerType)
+        private void doCreateMarker(string id, string latitude, string longitude, bool dragabble, string description, string markerType, string address)
         {
             setNewMarkerId(id);
             setNewMarkerCoords(latitude, longitude);
             setNewMarkerDraggable(dragabble);
             setNewMarkerDescription(description);
             setNewMarkerType(markerType);
+            setNewMarkerAddress(address);
 
             doAddUpdateMarker();
         }
@@ -109,6 +110,12 @@ namespace Test
         {
             callScopeFunction("setNewMarkerType", String.Format("\"{0}\"", markerType));
         }
+
+        private void setNewMarkerAddress(string address)
+        {
+            callScopeFunction("setNewMarkerAddress", String.Format("\"{0}\"", address));
+        }
+
 
         private void doremoveMarker(string id)
         {
