@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
             this.cbbxAddress = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cbbxType = new System.Windows.Forms.ComboBox();
@@ -51,12 +52,13 @@
             this.btnAddMarker = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
-            this.button4 = new System.Windows.Forms.Button();
+            this.testButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.testButton);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.cbbxAddress);
             this.panel1.Controls.Add(this.label6);
@@ -83,6 +85,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1003, 74);
             this.panel1.TabIndex = 0;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(575, 47);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(58, 23);
+            this.button4.TabIndex = 20;
+            this.button4.Text = "Coords";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // cbbxAddress
             // 
@@ -287,15 +299,15 @@
             this.btnAddMarker.UseVisualStyleBackColor = true;
             this.btnAddMarker.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button4
+            // testButton
             // 
-            this.button4.Location = new System.Drawing.Point(575, 47);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(58, 23);
-            this.button4.TabIndex = 20;
-            this.button4.Text = "Coords";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.testButton.Location = new System.Drawing.Point(733, 8);
+            this.testButton.Name = "testButton";
+            this.testButton.Size = new System.Drawing.Size(35, 23);
+            this.testButton.TabIndex = 21;
+            this.testButton.Text = "Test";
+            this.testButton.UseVisualStyleBackColor = true;
+            this.testButton.Click += new System.EventHandler(this.testButton_Click);
             // 
             // btnGetAddresCoord
             // 
@@ -338,6 +350,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button testButton;
     }
 }
 

@@ -89,6 +89,7 @@ namespace Test
             setNewMarkerAddress(address);
 
             doAddUpdateMarker();
+
         }
 
         private void btnRemoveMarker_Click(object sender, EventArgs e)
@@ -103,46 +104,6 @@ namespace Test
 
 
 
-        private void setNewMarkerId(string id)
-        {
-            callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
-        }
-
-        private void setNewMarkerCoords(string Latitude, string Longitude)
-        {
-            callScopeFunction("setNewMarkerCoords", String.Format("\"{0}\", \"{1}\"", Latitude, Longitude));
-        }
-
-        private void setNewMarkerDraggable(bool dragabble)
-        {
-            callScopeFunction("setNewMarkerDraggable", String.Format("{0}", dragabble.ToString().ToLower()));
-        }
-
-        private void setNewMarkerDescription(string description)
-        {
-            callScopeFunction("setNewMarkerDescription", String.Format("\"{0}\"", description));
-        }
-
-        private void setNewMarkerType(string markerType)
-        {
-            callScopeFunction("setNewMarkerType", String.Format("\"{0}\"", markerType));
-        }
-
-        private void setNewMarkerAddress(string address)
-        {
-            callScopeFunction("setNewMarkerAddress", String.Format("\"{0}\"", address));
-        }
-
-
-        private void doremoveMarker(string id)
-        {
-            callScopeFunction("removeMarker", String.Format("\"{0}\"", id));
-        }
-
-        private void doremoveAllMarkers()
-        {
-            callScopeFunction("removeAllMarkers", "");
-        }
 
         public object EvaluateScript(string script)
         {
@@ -181,11 +142,6 @@ namespace Test
 
             string retStr = (string)retObj;
             return retStr;
-        }
-
-        private void doAddUpdateMarker()
-        {
-            JsclickElementById("btnAddUpdateMarker");
         }
 
 
@@ -256,7 +212,10 @@ namespace Test
             //doCreateMarker("1", "33.4054515", "-86.7634086", false, "BHM South Plant", "Plant");
             //doCreateMarker("2", "33.487593", "-86.825162", false, "Truck 145", "Truck");
             //doCreateMarker("3", "33.507831", "-86.8122149", false, "Regions Field", "Job Site");
-            callScopeFunction("simulateMarkers", "");
+            //callScopeFunction("simulateMarkers", "");
+
+            doSimulateMarkers();
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -264,9 +223,9 @@ namespace Test
             edLatitude.Text = "";
             edLongitude.Text = "";
 
-            setNewMarkerAddress(cbbxAddress.Text);
+            //setNewMarkerAddress(cbbxAddress.Text);
 
-            doGetAddressCoordinates();
+            doGetAddressCoordinates(cbbxAddress.Text);
 
             //System.Threading.Thread.Sleep(100);
 
@@ -275,11 +234,84 @@ namespace Test
             //edLongitude.Text = getElementValue("edLongitude");
         }
 
-        private void doGetAddressCoordinates()
+        private void testButton_Click(object sender, EventArgs e)
         {
-            callScopeFunction("getNewMarkerAddressCoords", String.Format("", ""));
+            setNewMarkerId("XXX");
         }
 
+        //------------------NEW API-----------------
+        private void ExecuteScript(string script)
+        {
+            //callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
+            webView.ExecuteScript(script);
+        }
 
+        private void setNewMarkerId(string id)
+        {
+            //callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
+            ExecuteScript(String.Format("dotNetAPI.setNewMarkerID(\"{0}\")", id));
+        }
+
+        private void setNewMarkerCoords(string Latitude, string Longitude)
+        {
+            //callScopeFunction("setNewMarkerCoords", String.Format("\"{0}\", \"{1}\"", Latitude, Longitude));
+            ExecuteScript(String.Format("dotNetAPI.setNewMarkerCoords(\"{0}\", \"{1}\")", Latitude, Longitude));
+        }
+
+        private void setNewMarkerDraggable(bool dragabble)
+        {
+            //callScopeFunction("setNewMarkerDraggable", String.Format("{0}", dragabble.ToString().ToLower()));
+            ExecuteScript(String.Format("dotNetAPI.setNewMarkerDraggable({0})", dragabble.ToString().ToLower()));
+        }
+
+        private void setNewMarkerDescription(string description)
+        {
+            //callScopeFunction("setNewMarkerDescription", String.Format("\"{0}\"", description));
+            ExecuteScript(String.Format("dotNetAPI.setNewMarkerDescription(\"{0}\")", description));
+        }
+
+        private void setNewMarkerType(string markerType)
+        {
+            //callScopeFunction("setNewMarkerType", String.Format("\"{0}\"", markerType));
+            ExecuteScript(String.Format("dotNetAPI.setNewMarkerType(\"{0}\")", markerType));
+        }
+
+        private void setNewMarkerAddress(string address)
+        {
+            //callScopeFunction("setNewMarkerAddress", String.Format("\"{0}\"", address));
+            ExecuteScript(String.Format("dotNetAPI.setNewMarkerAddress(\"{0}\")", address));
+        }
+
+        private void doAddUpdateMarker()
+        {
+            //JsclickElementById("btnAddUpdateMarker");
+            ExecuteScript(String.Format("dotNetAPI.addUpdateMarkerFromScope()", ""));
+        }
+
+        private void doremoveMarker(string id)
+        {
+            //callScopeFunction("removeMarker", String.Format("\"{0}\"", id));
+            ExecuteScript(String.Format("dotNetAPI.removeMarker(\"{0}\")", id));
+        }
+
+        private void doremoveAllMarkers()
+        {
+            //callScopeFunction("removeAllMarkers", "");
+            ExecuteScript(String.Format("dotNetAPI.removeAllMarkers()", ""));
+        }
+
+        private void doGetAddressCoordinates(string address)
+        {
+            //callScopeFunction("getNewMarkerAddressCoords", String.Format("", ""));
+            //the registerd callback will be executed with the correct coords
+            ExecuteScript(String.Format("dotNetAPI.getAddressCoords(\"{0}\")", address));
+        }
+
+        private void doSimulateMarkers()
+        {
+            //callScopeFunction("simulateMarkers", "");
+            ExecuteScript(String.Format("dotNetAPI.simulateMarkers()", ""));
+        }
+            
     }
 }
