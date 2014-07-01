@@ -18,6 +18,20 @@ namespace Test
             InitializeComponent();
         }
 
+        public class CallbackObjectForJs
+        {
+            public void showMessage(string msg)
+            {
+                MessageBox.Show(msg);
+            }
+
+            public void geocodedLatLong(string lat, string lng)
+            {
+                MessageBox.Show(String.Format("lat={0}, long={1}", lat, lng) );
+            }
+            
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             string mapServer = Properties.Settings.Default.MapServer;
@@ -26,6 +40,9 @@ namespace Test
             //webView = new WebView("http://cnn.com", new BrowserSettings());
             webView.PropertyChanged += new PropertyChangedEventHandler(webView_PropertyChanged);
             webView.Dock = DockStyle.Fill;
+
+            webView.RegisterJsObject("callbackObj", new CallbackObjectForJs());
+
             this.Controls.Add(webView);
         }
         
@@ -251,11 +268,11 @@ namespace Test
 
             doGetAddressCoordinates();
 
-            System.Threading.Thread.Sleep(100);
+            //System.Threading.Thread.Sleep(100);
 
-            edLatitude.Text = getElementValue("edLatitude");
+            //edLatitude.Text = getElementValue("edLatitude");
 
-            edLongitude.Text = getElementValue("edLongitude");
+            //edLongitude.Text = getElementValue("edLongitude");
         }
 
         private void doGetAddressCoordinates()
