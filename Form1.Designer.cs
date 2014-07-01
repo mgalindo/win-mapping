@@ -1,6 +1,6 @@
 ﻿namespace Test
 {
-    partial class Form1
+    partial class btnGetAddresCoord
     {
         /// <summary>
         /// Erforderliche Designervariable.
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbbxAddress = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.cbbxType = new System.Windows.Forms.ComboBox();
             this.edDescription = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -48,13 +50,14 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnAddMarker = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label6 = new System.Windows.Forms.Label();
-            this.cbbxAddress = new System.Windows.Forms.ComboBox();
+            this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
+            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.cbbxAddress);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.cbbxType);
@@ -80,6 +83,40 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1003, 74);
             this.panel1.TabIndex = 0;
+            // 
+            // cbbxAddress
+            // 
+            this.cbbxAddress.FormattingEnabled = true;
+            this.cbbxAddress.Items.AddRange(new object[] {
+            "",
+            "HEADQUARTERS 1800 International Park Dr, Birmingham, AL 35244",
+            "COLUMBUS 5168 Blazer Parkway, Dublin, Ohio 43017-1339",
+            "JWS 10000 West 75th St., Suite 103,  Shawnee Mission, KS 66204-2241",
+            "INTERGRA 9014 Heritage Parkway,Suite 303,  Woodridge, IL 60517-4939",
+            "CE 18, rue des Cayennes, Z.A. des Boutries,  78704 Conflans Ste Honorine Cedex,  " +
+                "FRANCE",
+            "TMS Houtsingel 5,  2719 EA Zoetermeer, The Netherlands",
+            "KP Av. Constituição, 1273 CEP 15025 120,  São José do Rio Preto, São Paulo,  Braz" +
+                "il",
+            "UK Unit 2 Avon Valley Business Park,  Chapel Way, St Annes, Bristol, BS4 4EU,  UK" +
+                "",
+            "INDIA 614C Wing, BSEL Tech Park,  Plot no. 39/5 & 39/5A, Opp. Vashi Station,  Vas" +
+                "hi - Navi Mumbai – 400 705",
+            "COLOMBIA Cra 7 #73-55 Edificio Torre Ultrabursátiles,  Bogotá, Colombia",
+            "BadAddressCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"});
+            this.cbbxAddress.Location = new System.Drawing.Point(49, 49);
+            this.cbbxAddress.Name = "cbbxAddress";
+            this.cbbxAddress.Size = new System.Drawing.Size(520, 21);
+            this.cbbxAddress.TabIndex = 19;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(45, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Address";
             // 
             // cbbxType
             // 
@@ -123,9 +160,9 @@
             // 
             // btnRetrieveMarker
             // 
-            this.btnRetrieveMarker.Location = new System.Drawing.Point(606, 47);
+            this.btnRetrieveMarker.Location = new System.Drawing.Point(639, 47);
             this.btnRetrieveMarker.Name = "btnRetrieveMarker";
-            this.btnRetrieveMarker.Size = new System.Drawing.Size(96, 23);
+            this.btnRetrieveMarker.Size = new System.Drawing.Size(63, 23);
             this.btnRetrieveMarker.TabIndex = 13;
             this.btnRetrieveMarker.Text = "Retrieve Marker";
             this.btnRetrieveMarker.UseVisualStyleBackColor = true;
@@ -168,7 +205,6 @@
             this.edLongitude.Name = "edLongitude";
             this.edLongitude.Size = new System.Drawing.Size(127, 20);
             this.edLongitude.TabIndex = 9;
-            this.edLongitude.Text = "-86.69652080535889";
             // 
             // edLatitude
             // 
@@ -176,7 +212,6 @@
             this.edLatitude.Name = "edLatitude";
             this.edLatitude.Size = new System.Drawing.Size(117, 20);
             this.edLatitude.TabIndex = 8;
-            this.edLatitude.Text = "33.43017060777363";
             // 
             // edId
             // 
@@ -252,47 +287,23 @@
             this.btnAddMarker.UseVisualStyleBackColor = true;
             this.btnAddMarker.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label6
+            // button4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 52);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 13);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Address";
+            this.button4.Location = new System.Drawing.Point(575, 47);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(58, 23);
+            this.button4.TabIndex = 20;
+            this.button4.Text = "Coords";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // cbbxAddress
-            // 
-            this.cbbxAddress.FormattingEnabled = true;
-            this.cbbxAddress.Items.AddRange(new object[] {
-            "",
-            "HEADQUARTERS 1800 International Park Dr, Birmingham, AL 35244",
-            "COLUMBUS 5168 Blazer Parkway, Dublin, Ohio 43017-1339",
-            "JWS 10000 West 75th St., Suite 103,  Shawnee Mission, KS 66204-2241",
-            "INTERGRA 9014 Heritage Parkway,Suite 303,  Woodridge, IL 60517-4939",
-            "CE 18, rue des Cayennes, Z.A. des Boutries,  78704 Conflans Ste Honorine Cedex,  " +
-                "FRANCE",
-            "TMS Houtsingel 5,  2719 EA Zoetermeer, The Netherlands",
-            "KP Av. Constituição, 1273 CEP 15025 120,  São José do Rio Preto, São Paulo,  Braz" +
-                "il",
-            "UK Unit 2 Avon Valley Business Park,  Chapel Way, St Annes, Bristol, BS4 4EU,  UK" +
-                "",
-            "INDIA 614C Wing, BSEL Tech Park,  Plot no. 39/5 & 39/5A, Opp. Vashi Station,  Vas" +
-                "hi - Navi Mumbai – 400 705",
-            "COLOMBIA Cra 7 #73-55 Edificio Torre Ultrabursátiles,  Bogotá, Colombia",
-            "BadAddressCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"});
-            this.cbbxAddress.Location = new System.Drawing.Point(49, 49);
-            this.cbbxAddress.Name = "cbbxAddress";
-            this.cbbxAddress.Size = new System.Drawing.Size(551, 21);
-            this.cbbxAddress.TabIndex = 19;
-            // 
-            // Form1
+            // btnGetAddresCoord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 573);
             this.Controls.Add(this.panel1);
-            this.Name = "Form1";
+            this.Name = "btnGetAddresCoord";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
@@ -325,6 +336,8 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ComboBox cbbxAddress;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog2;
+        private System.Windows.Forms.Button button4;
     }
 }
 

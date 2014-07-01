@@ -10,10 +10,10 @@ using CefSharp;
 
 namespace Test
 {
-    public partial class Form1 : Form
+    public partial class btnGetAddresCoord : Form
     {
         WebView webView;
-        public Form1()
+        public btnGetAddresCoord()
         {
             InitializeComponent();
         }
@@ -242,6 +242,26 @@ namespace Test
             callScopeFunction("simulateMarkers", "");
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            edLatitude.Text = "";
+            edLongitude.Text = "";
+
+            setNewMarkerAddress(cbbxAddress.Text);
+
+            doGetAddressCoordinates();
+
+            System.Threading.Thread.Sleep(100);
+
+            edLatitude.Text = getElementValue("edLatitude");
+
+            edLongitude.Text = getElementValue("edLongitude");
+        }
+
+        private void doGetAddressCoordinates()
+        {
+            callScopeFunction("getNewMarkerAddressCoords", String.Format("", ""));
+        }
 
 
     }
