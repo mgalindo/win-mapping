@@ -10,10 +10,10 @@ using CefSharp;
 
 namespace Test
 {
-    public partial class btnGetAddresCoord : Form
+    public partial class Form1 : Form
     {
         WebView webView;
-        public btnGetAddresCoord()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -236,7 +236,20 @@ namespace Test
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            setNewMarkerId("XXX");
+            MapObject mapObject = new MapObject();
+            mapObject.id = edId.Text;
+            mapObject.latitude = edLatitude.Text;
+            mapObject.longitude = edLongitude.Text;
+            mapObject.description = edDescription.Text;
+            mapObject.address = cbbxAddress.Text;
+            mapObject.markerType = cbbxType.Text;
+            mapObject.options.draggable = ckbxDragabble.Checked;
+
+            string JSONString;
+
+            JSONString = mapObject.ToJSON();
+
+
         }
 
         //------------------NEW API-----------------
