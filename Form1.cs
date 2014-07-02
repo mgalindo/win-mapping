@@ -249,10 +249,18 @@ namespace Test
 
             JSONString = mapObject.ToJSON();
 
+            doAddUpdateMarker2(JSONString);
 
         }
 
         //------------------NEW API-----------------
+
+        private void doAddUpdateMarker2(string JSONMapObject)
+        {
+            //JsclickElementById("btnAddUpdateMarker");
+            ExecuteScript(String.Format("dotNetAPI.addUpdateMarker({0})", JSONMapObject));
+        }
+
         private void ExecuteScript(string script)
         {
             //callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
