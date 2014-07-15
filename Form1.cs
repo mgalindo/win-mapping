@@ -25,9 +25,9 @@ namespace Test
                 MessageBox.Show(msg);
             }
 
-            public void geocodedLatLong(string lat, string lng)
+            public void geocodedLatLong(string lat, string lng, string id)
             {
-                MessageBox.Show(String.Format("lat={0}, long={1}", lat, lng) );
+                MessageBox.Show(String.Format("lat={0}, long={1}, id={2}", lat, lng, id));
             }
             
         }
@@ -81,38 +81,31 @@ namespace Test
 
         private void doCreateMarker(string id, string latitude, string longitude, bool dragabble, string description, string markerType, string address)
         {
-            setNewMarkerId(id);
-            setNewMarkerCoords(latitude, longitude);
-            setNewMarkerDraggable(dragabble);
-            setNewMarkerDescription(description);
-            setNewMarkerType(markerType);
-            setNewMarkerAddress(address);
 
-            doAddUpdateMarker();
+            MapObject mapObject = new MapObject();
+            mapObject.id = id;
+            mapObject.latitude = latitude;
+            mapObject.longitude = longitude;
+            mapObject.description = description;
+            mapObject.address = address;
+            mapObject.markerType = markerType;
+            mapObject.options.draggable = dragabble;
 
+            string JSONString;
+
+            JSONString = mapObject.ToJSON();
+
+            JSAddUpdateMarker(JSONString);
         }
 
         private void btnRemoveMarker_Click(object sender, EventArgs e)
         {
-            doremoveMarker(edId.Text);
+            JSRemoveMarker(edId.Text);
         }
 
         private void btnRemoveAll_Click(object sender, EventArgs e)
         {
-            doremoveAllMarkers();
-        }
-
-
-
-
-        public object EvaluateScript(string script)
-        {
-            return webView.EvaluateScript(script);
-        }
-
-        private void doRetrieveMarker(string id)
-        {
-            callScopeFunction("retrieveMarker", String.Format("\"{0}\"", id));
+            JSRemoveAllMarkers();
         }
 
 
@@ -122,13 +115,6 @@ namespace Test
             edLongitude.Text = "";
 
             doRetrieveMarker(edId.Text);
-            //We need a small delay to let the DOM get the changes
-            System.Threading.Thread.Sleep(100);
-
-            edLatitude.Text = getElementValue("edLatitude");
-
-            edLongitude.Text = getElementValue("edLongitude");
-            //doApply();
         }
 
 
@@ -209,12 +195,8 @@ namespace Test
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            //doCreateMarker("1", "33.4054515", "-86.7634086", false, "BHM South Plant", "Plant");
-            //doCreateMarker("2", "33.487593", "-86.825162", false, "Truck 145", "Truck");
-            //doCreateMarker("3", "33.507831", "-86.8122149", false, "Regions Field", "Job Site");
-            //callScopeFunction("simulateMarkers", "");
 
-            doSimulateMarkers();
+            JSSimulateMarkers();
 
         }
 
@@ -223,49 +205,15 @@ namespace Test
             edLatitude.Text = "";
             edLongitude.Text = "";
 
-            //setNewMarkerAddress(cbbxAddress.Text);
-
-            doGetAddressCoordinates(cbbxAddress.Text);
-
-            //System.Threading.Thread.Sleep(100);
-
-            //edLatitude.Text = getElementValue("edLatitude");
-
-            //edLongitude.Text = getElementValue("edLongitude");
+            //The registerd Call back will be executed with the corrdinates
+            JSGetAddressCoordinates(cbbxAddress.Text, edId.Text);
         }
 
         private void testButton_Click(object sender, EventArgs e)
         {
-            MapObject mapObject = new MapObject();
-            mapObject.id = edId.Text;
-            mapObject.latitude = edLatitude.Text;
-            mapObject.longitude = edLongitude.Text;
-            mapObject.description = edDescription.Text;
-            mapObject.address = cbbxAddress.Text;
-            mapObject.markerType = cbbxType.Text;
-            mapObject.options.draggable = ckbxDragabble.Checked;
-
-            string JSONString;
-
-            JSONString = mapObject.ToJSON();
-
-            doAddUpdateMarker2(JSONString);
 
         }
 
-        //------------------NEW API-----------------
-
-        private void doAddUpdateMarker2(string JSONMapObject)
-        {
-            //JsclickElementById("btnAddUpdateMarker");
-            ExecuteScript(String.Format("dotNetAPI.addUpdateMarker({0})", JSONMapObject));
-        }
-
-        private void ExecuteScript(string script)
-        {
-            //callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
-            webView.ExecuteScript(script);
-        }
 
         private void setNewMarkerId(string id)
         {
@@ -309,30 +257,73 @@ namespace Test
             ExecuteScript(String.Format("dotNetAPI.addUpdateMarkerFromScope()", ""));
         }
 
-        private void doremoveMarker(string id)
+        private void doRetrieveMarker(string id)
         {
-            //callScopeFunction("removeMarker", String.Format("\"{0}\"", id));
+            MapObject mapObject = JSRetrieveMarker(id);
+
+            edId.Text = mapObject.id;
+            edLatitude.Text = mapObject.latitude;
+            edLongitude.Text = mapObject.longitude;
+            ckbxDragabble.Checked = mapObject.options.draggable;
+            edDescription.Text = mapObject.description;
+            cbbxType.Text = mapObject.markerType;
+            cbbxAddress.Text = mapObject.address;
+        }
+
+
+        //------------------NEW API-----------------
+
+        private void JSAddUpdateMarker(string JSONMapObject)
+        {
+            ExecuteScript(String.Format("dotNetAPI.addUpdateMarker({0})", JSONMapObject));
+        }
+
+        private void JSGetAddressCoordinates(string address, string id)
+        {
+            //the registerd callback will be executed with the correct coords
+            ExecuteScript(String.Format("dotNetAPI.getAddressCoords(\"{0}\", \"{1}\")", address, id));
+        }
+
+
+        private void JSRemoveMarker(string id)
+        {
             ExecuteScript(String.Format("dotNetAPI.removeMarker(\"{0}\")", id));
         }
 
-        private void doremoveAllMarkers()
+
+        private void JSRemoveAllMarkers()
         {
-            //callScopeFunction("removeAllMarkers", "");
             ExecuteScript(String.Format("dotNetAPI.removeAllMarkers()", ""));
         }
 
-        private void doGetAddressCoordinates(string address)
+        private MapObject JSRetrieveMarker(string id)
         {
-            //callScopeFunction("getNewMarkerAddressCoords", String.Format("", ""));
-            //the registerd callback will be executed with the correct coords
-            ExecuteScript(String.Format("dotNetAPI.getAddressCoords(\"{0}\")", address));
+            object retObj = new Object();
+
+            retObj = EvaluateScript(String.Format("dotNetAPI.retrieveMarker(\"{0}\")", id));
+
+            string JSONString = (string)retObj;
+
+            MapObject mapObject  = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<MapObject>(JSONString);
+
+            return mapObject;
         }
 
-        private void doSimulateMarkers()
+        private void ExecuteScript(string script)
         {
-            //callScopeFunction("simulateMarkers", "");
+            //callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
+            webView.ExecuteScript(script);
+        }
+
+        public object EvaluateScript(string script)
+        {
+            return webView.EvaluateScript(script);
+        }
+
+        private void JSSimulateMarkers()
+        {
             ExecuteScript(String.Format("dotNetAPI.simulateMarkers()", ""));
         }
-            
+
     }
 }

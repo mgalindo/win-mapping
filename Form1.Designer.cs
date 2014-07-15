@@ -54,6 +54,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog3 = new System.Windows.Forms.FolderBrowserDialog();
+            this.folderBrowserDialog4 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -353,6 +354,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button testButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog3;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog4;
     }
 }
 
