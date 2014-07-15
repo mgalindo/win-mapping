@@ -48,7 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAddMarker = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -79,7 +79,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.btnAddMarker);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -281,15 +281,15 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "ID";
             // 
-            // button3
+            // btnRefresh
             // 
-            this.button3.Location = new System.Drawing.Point(875, 11);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(115, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Refresh";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnRefresh.Location = new System.Drawing.Point(875, 11);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(115, 23);
+            this.btnRefresh.TabIndex = 2;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.bbtnRefresh_Click);
             // 
             // button2
             // 
@@ -331,7 +331,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnAddMarker;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.CheckBox ckbxDragabble;
         private System.Windows.Forms.TextBox edLongitude;
         private System.Windows.Forms.TextBox edLatitude;

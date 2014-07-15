@@ -79,24 +79,6 @@ namespace Test
             doCreateMarker(edId.Text, edLatitude.Text, edLongitude.Text, ckbxDragabble.Checked, edDescription.Text, cbbxType.Text, cbbxAddress.Text);
         }
 
-        private void doCreateMarker(string id, string latitude, string longitude, bool dragabble, string description, string markerType, string address)
-        {
-
-            MapObject mapObject = new MapObject();
-            mapObject.id = id;
-            mapObject.latitude = latitude;
-            mapObject.longitude = longitude;
-            mapObject.description = description;
-            mapObject.address = address;
-            mapObject.markerType = markerType;
-            mapObject.options.draggable = dragabble;
-
-            string JSONString;
-
-            JSONString = mapObject.ToJSON();
-
-            JSAddUpdateMarker(JSONString);
-        }
 
         private void btnRemoveMarker_Click(object sender, EventArgs e)
         {
@@ -119,79 +101,17 @@ namespace Test
 
 
 
-        #region DOM manipulation Functions 
-
-        private string getElementValue(string elementId) {
-            object retObj = new Object();
-
-            retObj = EvaluateScript(String.Format("document.getElementById(\"{0}\").value", elementId));
-
-            string retStr = (string)retObj;
-            return retStr;
-        }
-
-
-        private void doApply()
-        {
-            JsclickElementById("btnApply");
-        }
-
-        private void doExecute()
-        {
-            JsclickElementById("btnEval");
-        }
-
-        private void callScopeFunction(string functionName, string parameters) 
-        {
-            JsSetElemeValuetById("edEval", String.Format("$scope.{0}({1})", functionName, parameters));
-            doApply();
-            doExecute();
-        }
-
-
-        private void JsclickElementById(string elementID)
-        {
-            JsFireEvent("document.getElementById('" + elementID + "')", "click");
-
-        }
-
-        public void JsFireEvent(string getElementQuery, string eventName)
-        {
-            webView.ExecuteScript(@"
-                                function fireEvent(element,event) {
-                                    var evt = document.createEvent('HTMLEvents');
-                                    evt.initEvent(event, true, true ); // event type,bubbling,cancelable
-                                    element.dispatchEvent(evt);                                 
-                                }
-                                " + String.Format("fireEvent({0}, '{1}');", getElementQuery, eventName));
-        }
-
-        private void JsSetElemeValuetById(string elementID, string elementValue)
-        {
-
-            webView.ExecuteScript(String.Format("document.getElementById('{0}').value='{1}'", elementID, elementValue));
-        }
-
-        private void btnClearMarkers_Click(object sender, EventArgs e)
-        {
-            clearAllMarkers();
-        }
-
-        private void clearAllMarkers()
-        {
-            JsclickElementById("btmRemoveAllMarkers");
-        }
-        #endregion
-
         private void button2_Click(object sender, EventArgs e)
         {
             webView.ShowDevTools();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+
+        private void bbtnRefresh_Click(object sender, EventArgs e)
         {
-            webView.Reload();
+           webView.Reload();
         }
+
 
         private void button1_Click_2(object sender, EventArgs e)
         {
@@ -215,48 +135,6 @@ namespace Test
         }
 
 
-        private void setNewMarkerId(string id)
-        {
-            //callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
-            ExecuteScript(String.Format("dotNetAPI.setNewMarkerID(\"{0}\")", id));
-        }
-
-        private void setNewMarkerCoords(string Latitude, string Longitude)
-        {
-            //callScopeFunction("setNewMarkerCoords", String.Format("\"{0}\", \"{1}\"", Latitude, Longitude));
-            ExecuteScript(String.Format("dotNetAPI.setNewMarkerCoords(\"{0}\", \"{1}\")", Latitude, Longitude));
-        }
-
-        private void setNewMarkerDraggable(bool dragabble)
-        {
-            //callScopeFunction("setNewMarkerDraggable", String.Format("{0}", dragabble.ToString().ToLower()));
-            ExecuteScript(String.Format("dotNetAPI.setNewMarkerDraggable({0})", dragabble.ToString().ToLower()));
-        }
-
-        private void setNewMarkerDescription(string description)
-        {
-            //callScopeFunction("setNewMarkerDescription", String.Format("\"{0}\"", description));
-            ExecuteScript(String.Format("dotNetAPI.setNewMarkerDescription(\"{0}\")", description));
-        }
-
-        private void setNewMarkerType(string markerType)
-        {
-            //callScopeFunction("setNewMarkerType", String.Format("\"{0}\"", markerType));
-            ExecuteScript(String.Format("dotNetAPI.setNewMarkerType(\"{0}\")", markerType));
-        }
-
-        private void setNewMarkerAddress(string address)
-        {
-            //callScopeFunction("setNewMarkerAddress", String.Format("\"{0}\"", address));
-            ExecuteScript(String.Format("dotNetAPI.setNewMarkerAddress(\"{0}\")", address));
-        }
-
-        private void doAddUpdateMarker()
-        {
-            //JsclickElementById("btnAddUpdateMarker");
-            ExecuteScript(String.Format("dotNetAPI.addUpdateMarkerFromScope()", ""));
-        }
-
         private void doRetrieveMarker(string id)
         {
             MapObject mapObject = JSRetrieveMarker(id);
@@ -272,6 +150,34 @@ namespace Test
 
 
         //------------------NEW API-----------------
+
+        private void ExecuteScript(string script)
+        {
+            webView.ExecuteScript(script);
+        }
+
+        public object EvaluateScript(string script)
+        {
+            return webView.EvaluateScript(script);
+        }
+
+        private void doCreateMarker(string id, string latitude, string longitude, bool dragabble, string description, string markerType, string address)
+        {
+            MapObject mapObject = new MapObject();
+            mapObject.id = id;
+            mapObject.latitude = latitude;
+            mapObject.longitude = longitude;
+            mapObject.description = description;
+            mapObject.address = address;
+            mapObject.markerType = markerType;
+            mapObject.options.draggable = dragabble;
+
+            string JSONString;
+
+            JSONString = mapObject.ToJSON();
+
+            JSAddUpdateMarker(JSONString);
+        }
 
         private void JSAddUpdateMarker(string JSONMapObject)
         {
@@ -307,17 +213,6 @@ namespace Test
             MapObject mapObject  = new System.Web.Script.Serialization.JavaScriptSerializer().Deserialize<MapObject>(JSONString);
 
             return mapObject;
-        }
-
-        private void ExecuteScript(string script)
-        {
-            //callScopeFunction("setNewMarkerID", String.Format("\"{0}\"", id));
-            webView.ExecuteScript(script);
-        }
-
-        public object EvaluateScript(string script)
-        {
-            return webView.EvaluateScript(script);
         }
 
         private void JSSimulateMarkers()
